@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <center>
+
+    <h1 style="color: red">Rock, Paper and Scissor Game</h1>
+    <button class="rock" style="padding : 20px">rock</button>
+    <button class="paper" style="padding : 20px">paper</button>
+    <button class="scissor" style="padding : 20px">scissor</button>
+
+    <p>Your Choices:<h1><span class="yourchoices" style="color: blueviolet;"></span></h1></p>
+    <p>Comptuer Choices:<h1><span class="computerchocies" style="color: blue;"></span></h1></p>
+
+    Result: <h1> <div class="result" style="color: green"></div></h1>
+
+    <h3>wins:<span class="win"></span></h3>
+    <h3>losses:<span class='loss'></span></h3>
+    <h3>ties:<span class='ties'></span></h3>
+    <button class="reset">Reset</button>
+</center>
+    <script>
+        var wins=0,losses=0,ties=0;
+        for (var i=0; i< document.querySelectorAll('button').length-1;i++){
+            document.querySelectorAll("button")[i].addEventListener('click',function(){
+            
+            var yourchoices=this.innerHTML;
+            var l=['rock','paper','scissor']
+            var sizeofbuttons=document.querySelectorAll('button').length-1;
+
+            var computerchocies = Math.floor(Math.random() * sizeofbuttons)
+            console.log(computerchocies)
+            
+            document.querySelector('.yourchoices').innerHTML=yourchoices;
+            document.querySelector('.computerchocies').innerHTML=l[computerchocies];
+            
+
+
+            if (yourchoices === l[computerchocies]){
+                ties+=1;
+                document.querySelector('.ties').innerHTML=ties;
+                document.querySelector('.result').innerHTML="Tie";
+            }
+            else if ( (yourchoices === 'paper' && l[computerchocies] === 'rock')|| 
+                    (yourchoices === 'rock' && l[computerchocies] === 'scissor') ||
+                    (yourchoices === 'scissor' && l[computerchocies] === 'paper'))
+            {
+                wins+=1;
+                document.querySelector('.win').innerHTML=wins;
+                document.querySelector('.result').innerHTML="You won";
+                
+
+            }
+            else if  ((yourchoices==='paper' && l[computerchocies] ==='scissor') ||
+                     (yourchoices === 'rock' && l[computerchocies] === 'paper') || 
+                    (yourchoices === 'scissor' && l[computerchocies] === 'rock')){
+                losses+=1;
+                document.querySelector('.loss').innerHTML=losses;
+                document.querySelector('.result').innerHTML="You loss";
+
+                
+                
+            }
+        
+
+        })
+        document.querySelector('.reset').addEventListener('click',function(){
+            document.querySelector('.win').innerHTML=0;
+            
+            document.querySelector('.ties').innerHTML=0;
+            document.querySelector('.loss').innerHTML=0;
+            document.querySelector('.yourchoices').innerHTML="";
+            document.querySelector('.computerchocies').innerHTML="";
+            document.querySelector('.result').innerHTML="";
+
+
+            wins=0,losses=0,ties=0;
+        })
+    }
+    </script>
+</body>
+
+</html>
